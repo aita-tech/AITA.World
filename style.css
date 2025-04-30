@@ -1,4 +1,6 @@
 /* ── Global reset: include padding + border in element width ── */
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -26,7 +28,7 @@
 body {
     background: var(--dark-gradient);              /* replaces solid #fff   */
     color: var(--light-color);                     /* site-wide text to white*/
-    font-family: 'Inter', sans-serif;
+    font-family: 'Golos Text', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -40,10 +42,24 @@ body {
 
 /* 2. Default section surface – no more white blocks */
 section {
-    background: transparent;                       /* inherits dark bg      */
-    padding: 90px 0;
+    background: transparent;      /* inherits page gradient */
+    padding-block: 120px;        /* vertical breathing space */
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+}
+
+/* Add spacing between consecutive sections */
+section + section {              /* every section that follows another */
+    margin-top: 120px;
+}
+
+@media (max-width: 768px) {
+    section { 
+        padding-block: 80px; 
+    }
+    section + section { 
+        margin-top: 80px; 
+    }
 }
 
 /* Animation Classes */
@@ -399,11 +415,19 @@ h3 {
 }
 
 /* Solution Points */
+.solution-points {
+    display: flex;          /* keep default column flow       */
+    flex-direction: column;
+    gap: 56px;             /* space between cards (>= hover) */
+}
+
 .point {
+    margin: 0;             /* remove any margins to rely on gap */
     padding: 40px;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    will-change: transform;  /* hint the GPU, smoother anim     */
 }
 
 .point::before {
@@ -435,6 +459,18 @@ h3 {
     gap: 15px;
 }
 
+@media (max-width: 768px) {
+    .solution-points {
+        gap: 40px;         /* a bit tighter on mobile        */
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .point:hover {
+        transform: none;   /* accessibility fallback */
+    }
+}
+
 /* Roles and Cards */
 .role-card {
     padding: 40px;
@@ -448,12 +484,33 @@ h3 {
 }
 
 /* Advantages */
+.advantages {
+    background: linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(0,0,0,.00) 100%);
+    overflow: visible;                /* was hidden – no need now        */
+    will-change: auto;                /* reset hint                      */
+}
+
+/* Remove the pattern that causes banding */
+/* .advantages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="rgba(0,168,150,0.02)" cx="50" cy="50" r="50"/></svg>');
+    background-size: 60px 60px;
+    opacity: .25;
+    filter: blur(1px);
+} */
+
 .advantage-item {
+    overflow: visible;                /* ensure shadows never clip */
+    box-shadow: 0 12px 32px rgba(0,0,0,.25);
+    transition: var(--transition);
     padding: 40px 30px;
     text-align: center;
-    transition: var(--transition);
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -461,38 +518,18 @@ h3 {
     min-height: 240px;
 }
 
-.advantage-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    opacity: 0;
-    transition: var(--transition);
-}
-
 .advantage-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03);                 /* no vertical translate → no clash  */
 }
 
-.advantage-item:hover::before {
-    opacity: 1;
-}
-
-.advantage-item img {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 1.5rem;
-    transition: transform 0.5s ease;
-    filter: brightness(1.2);
-}
-
-.advantage-item:hover img {
-    transform: scale(1.1) rotate(5deg);
-    filter: brightness(1.4);
+.advantage-icon i,
+.advantage-icon svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 2;
+    color: var(--accent-color);
+    fill: none;                             /* keep Lucide outline look          */
+    margin-bottom: 16px;
 }
 
 .advantage-item h3 {
@@ -658,7 +695,8 @@ h3 {
     }
     
     section {
-        padding: 60px 0;
+        padding: 80px 0;                          /* slightly less padding on mobile */
+        margin-bottom: 24px;                      /* less spacing on mobile */
     }
     
     h1 {
@@ -750,24 +788,6 @@ h3 {
 }
 
 /* Advantages Section */
-.advantages {
-    background: linear-gradient(135deg, rgba(0, 168, 150, 0.03), rgba(5, 102, 141, 0.03));
-    position: relative;
-    overflow: hidden;
-}
-
-.advantages::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="rgba(0,168,150,0.02)" cx="50" cy="50" r="50"/></svg>');
-    background-size: 30px 30px;
-    opacity: 0.5;
-}
-
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -871,6 +891,15 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .hero .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;          /* ← space between the two buttons */
+        margin-bottom: 3rem;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
     .hero {
         padding: 120px 20px 60px;
         text-align: left;
@@ -881,21 +910,12 @@ footer {
         line-height: 1.3;
         margin-bottom: 1.5rem;
         text-align: left;
-        background: none;
-        color: var(--light-color);
-        -webkit-background-clip: unset;
-        -webkit-text-fill-color: var(--light-color);
     }
     
     .hero .subheadline {
         font-size: 1.1rem;
         text-align: left;
         margin-bottom: 2rem;
-    }
-    
-    .hero .cta-buttons {
-        justify-content: flex-start;
-        gap: 12px;
     }
     
     .hero-stats {
@@ -931,7 +951,8 @@ footer {
     }
 
     section {
-        padding: 60px 0;
+        padding: 80px 0;                          /* slightly less padding on mobile */
+        margin-bottom: 24px;                      /* less spacing on mobile */
     }
 
     .hero {
@@ -1059,19 +1080,19 @@ footer {
     transition: transform .35s ease-out;
     padding: 80px 24px 48px;
     z-index: 1100;
+    overflow-y: auto;                 /* enable vertical scroll        */
+    -webkit-overflow-scrolling: touch;/* smooth momentum on iOS Safari */
+}
+
+.nav-drawer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 40px;             /* new – prevents last item from hiding behind bottom padding */
 }
 
 .nav-drawer.open {
     transform: translateX(0);
-}
-
-.nav-drawer ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
 }
 
 .nav-drawer a {
@@ -1163,6 +1184,8 @@ footer {
     .advantages-grid {
         display: flex;
         overflow-x: auto;
+        overflow-y: hidden;      /* NEW – kill vertical drag */
+        touch-action: pan-x;     /* NEW – allow only horizontal gesture */
         gap: 20px;
         scroll-snap-type: x mandatory;
         padding-bottom: 6px;      /* little space for scrollbar */
@@ -1176,6 +1199,8 @@ footer {
     .advantage-item {
         flex: 0 0 80vw;            /* 80 % viewport width */
         max-width: 320px;
+        height: 240px;             /* fixed height to prevent vertical drag */
+        min-height: 240px;         /* keep existing min-height */
         scroll-snap-align: center;
         padding: 32px 24px;
     }
@@ -1330,106 +1355,7 @@ summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-cont
 summary::after{content:"⌄";transition:.2s}
 details[open] summary::after{transform:rotate(180deg)}
 
-/*── pricing cards ──────────────────────────*/
-.pricing-card{
-  position:relative;
-  background:rgba(255,255,255,.04);
-  padding:48px 40px 40px;
-  border-radius:12px;
-  flex:1 1 280px;
-  box-shadow:0 8px 22px rgba(0,0,0,.25);
-}
-
-.pricing-card h3{margin-top:0;font-size:1.6rem}
-.pricing-card .micro-head{margin:.4rem 0 1rem;font-size:.95rem;color:var(--accent-color)}
-.pricing-list{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:14px}
-.pricing-list li{display:flex;gap:10px;align-items:flex-start;font-size:1rem;line-height:1.45}
-.pricing-list strong{min-width:64px;font-weight:600;color:var(--accent-color)}
-/*── icon "badge" ───────────────────────────*/
-.card-icon{
-  position:absolute;
-  top:22px;right:22px;
-  width:38px;height:38px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:rgba(95,242,140,.08);
-}
-.card-icon i{width:20px;height:20px;color:var(--accent-color)}
-/*── responsive grid gap fix ────────────────*/
-.model-details{display:flex;flex-wrap:wrap;gap:32px}
-@media(max-width:768px){.pricing-card{padding:32px 24px}}
-
-/* Hide top nav on mobile */
-@media (max-width: 768px) {
-    .top-nav {
-        display: none;
-    }
-    
-    .hero {
-        padding: 120px 20px 60px;
-        text-align: left;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-        line-height: 1.3;
-        margin-bottom: 1.5rem;
-        text-align: left;
-    }
-    
-    .hero .subheadline {
-        font-size: 1.1rem;
-        text-align: left;
-        margin-bottom: 2rem;
-    }
-    
-    .hero .cta-buttons {
-        justify-content: flex-start;
-        gap: 12px;
-    }
-    
-    .hero-stats {
-        margin-top: 3rem;
-        justify-content: flex-start;
-        gap: 2rem;
-    }
-    
-    .hero-stats .stat {
-        text-align: left;
-    }
-    
-    .hero-stats strong {
-        font-size: 1.8rem;
-    }
-    
-    .hero-stats span {
-        font-size: 0.85rem;
-    }
-}
-
-/* ── Hero desktop layout fix ─────────────────────────── */
-@media (min-width: 769px) {
-    .hero .cta-buttons {
-        display: flex;
-        gap: 24px;            /* space between buttons */
-        justify-content: center;
-        flex-wrap: wrap;      /* keep nice wrap ≤1024px */
-    }
-}
-
-/* ── CTA desktop buttons row ────────────────────────── */
-@media (min-width: 769px) {
-    .cta .cta-buttons {
-        flex-direction: row;          /* row instead of column */
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-    .cta .btn {
-        width: auto;                  /* let the content define w */
-        min-width: 180px;             /* keep brand rhythm */
-    }
-}
-
-/* ── Logo styles ─────────────────────────── */
+/*── Logo styles ─────────────────────────── */
 .logo-img {
     filter: brightness(0) invert(1);  /* Make logo white */
     transition: filter 0.3s ease;
@@ -1724,4 +1650,112 @@ details[open] summary::after{transform:rotate(180deg)}
     .partner-card h3 {
         font-size: 0.9rem;
     }
+}
+
+/* ── Scroll-to-top FAB ────────────────────────── */
+.scroll-top{
+  position:fixed; right:24px; bottom:24px;
+  width:56px; height:56px;      /* same on all devices     */
+  background:var(--primary-color);
+  border-radius:50%; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+
+  /* start hidden – will be revealed by JS */
+  opacity:0; visibility:hidden; transform:scale(.8);
+
+  transition:opacity .25s, transform .25s;
+  z-index:1200;                 /* above everything else   */
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+}
+
+.scroll-top i{width:28px;height:28px;color:#fff;}
+
+.scroll-top.visible{            /* toggled by JS           */
+  opacity:1; visibility:visible; transform:scale(1);
+}
+
+@media(max-width:768px){
+  .scroll-top{width:48px;height:48px;right:16px;bottom:16px;}
+  .scroll-top i{width:24px;height:24px;}
+}
+
+/* ── absolute lower-right anchor override ───────────────── */
+body > .scroll-top{
+  position: fixed !important;   /* ensure fixed, not relative */
+  right: 24px !important;       /* distance from viewport edge */
+  bottom: 24px !important;
+  z-index: 1200 !important;     /* above everything */
+}
+
+@media (max-width: 480px){
+  body > .scroll-top{
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+}
+
+/* Contact Form Styles */
+.contact-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Required field indicator */
+label:has(+ input[required])::after {
+    content: " *";
+    color: var(--primary-color);
 } 

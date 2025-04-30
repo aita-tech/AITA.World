@@ -210,27 +210,19 @@ document.addEventListener('DOMContentLoaded',()=>{lucide.createIcons()});
 lucide.createIcons();
 
 // Scroll to top functionality
-const scrollTopButton = document.querySelector('.scroll-top');
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollTopBtn = document.querySelector('.scroll-top');
+  if (!scrollTopBtn) return;                // safety guard
 
-// Show/hide button based on scroll position
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 500) {
-        scrollTopButton.classList.add('visible');
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {         // show after 500 px
+      scrollTopBtn.classList.add('visible');
     } else {
-        scrollTopButton.classList.remove('visible');
+      scrollTopBtn.classList.remove('visible');
     }
-});
+  }, { passive:true });
 
-// Smooth scroll to top with animation
-scrollTopButton.addEventListener('click', () => {
-    scrollTopButton.classList.add('scrolling');
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-    
-    // Remove animation class after scrolling completes
-    setTimeout(() => {
-        scrollTopButton.classList.remove('scrolling');
-    }, 600);
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
 }); 
