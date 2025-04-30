@@ -158,10 +158,9 @@ function highlightNavigation() {
         'hero': 'hero',
         'pains': 'pains',
         'solution': 'solution',
-        'how-it-works': 'how-it-works',
-        'benefits': 'benefits',
+        'partners': 'partners',
+        'benefits': 'advantages',
         'projects': 'projects',
-        'pricing': 'pricing',
         'roadmap': 'roadmap',
         'founders': 'founders',
         'contact': 'contact'
@@ -211,18 +210,35 @@ lucide.createIcons();
 
 // Scroll to top functionality
 document.addEventListener('DOMContentLoaded', () => {
-  const scrollTopBtn = document.querySelector('.scroll-top');
-  if (!scrollTopBtn) return;                // safety guard
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    if (!scrollTopBtn) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 500) {         // show after 500 px
-      scrollTopBtn.classList.add('visible');
-    } else {
-      scrollTopBtn.classList.remove('visible');
-    }
-  }, { passive:true });
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    }, { passive: true });
 
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top:0, behavior:'smooth' });
-  });
+    // Handle click to scroll to top
+    scrollTopBtn.addEventListener('click', () => {
+        // Cancel any existing smooth behavior first
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.scrollBehavior = 'auto';
+        
+        // Jump instantly to top
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
+        });
+        
+        // Re-enable smooth scrolling
+        setTimeout(() => {
+            document.documentElement.style.scrollBehavior = '';
+            document.body.style.scrollBehavior = '';
+        }, 0);
+    });
 }); 

@@ -1,6 +1,28 @@
 /* ── Global reset: include padding + border in element width ── */
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
 
+html {
+    background: var(--dark-gradient);   /* same as body */
+    overflow-y: scroll;                 /* prevent jump when scrollbar appears */
+    height: 100%;                       /* ensure full height */
+}
+
+html, body {
+    overscroll-behavior-y: none;        /* completely disable overscroll */
+    height: 100%;                       /* ensure full height */
+    overflow-x: hidden;                 /* prevent horizontal scroll */
+}
+
+body {
+    position: relative;                  /* establish positioning context */
+    min-height: 100%;                   /* ensure minimum full height */
+    overflow-y: auto;                   /* allow normal scrolling */
+    background: var(--dark-gradient);              /* replaces solid #fff   */
+    color: var(--light-color);                     /* site-wide text to white*/
+    font-family: 'Golos Text', sans-serif;
+    line-height: 1.6;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -1475,68 +1497,48 @@ details[open] summary::after{transform:rotate(180deg)}
 
 .scroll-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    right: 24px;
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
     background: var(--primary-color);
     border-radius: 50%;
+    border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(53, 198, 108, 0.4);
-    border: none;
-    outline: none;
+    transform: scale(0.8);
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 1200;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .scroll-top.visible {
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
 }
 
 .scroll-top i {
-    color: var(--light-color);
     width: 28px;
     height: 28px;
-    transition: transform 0.3s ease;
-}
-
-.scroll-top:hover i {
-    transform: translateY(-3px);
-}
-
-.scroll-top.scrolling i {
-    animation: scrollSpin 0.6s ease;
-}
-
-@keyframes scrollSpin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    color: #fff;
 }
 
 @media (max-width: 768px) {
     .scroll-top {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        box-shadow: 0 4px 15px rgba(53, 198, 108, 0.5);
+        width: 48px;
+        height: 48px;
+        right: 16px;
+        bottom: 16px;
     }
-
+    
     .scroll-top i {
         width: 24px;
         height: 24px;
-    }
-
-    .scroll-top:active {
-        transform: scale(0.95);
-        background: var(--secondary-color);
     }
 }
 
@@ -1652,48 +1654,6 @@ details[open] summary::after{transform:rotate(180deg)}
     }
 }
 
-/* ── Scroll-to-top FAB ────────────────────────── */
-.scroll-top{
-  position:fixed; right:24px; bottom:24px;
-  width:56px; height:56px;      /* same on all devices     */
-  background:var(--primary-color);
-  border-radius:50%; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-
-  /* start hidden – will be revealed by JS */
-  opacity:0; visibility:hidden; transform:scale(.8);
-
-  transition:opacity .25s, transform .25s;
-  z-index:1200;                 /* above everything else   */
-  box-shadow:0 6px 20px rgba(0,0,0,.35);
-}
-
-.scroll-top i{width:28px;height:28px;color:#fff;}
-
-.scroll-top.visible{            /* toggled by JS           */
-  opacity:1; visibility:visible; transform:scale(1);
-}
-
-@media(max-width:768px){
-  .scroll-top{width:48px;height:48px;right:16px;bottom:16px;}
-  .scroll-top i{width:24px;height:24px;}
-}
-
-/* ── absolute lower-right anchor override ───────────────── */
-body > .scroll-top{
-  position: fixed !important;   /* ensure fixed, not relative */
-  right: 24px !important;       /* distance from viewport edge */
-  bottom: 24px !important;
-  z-index: 1200 !important;     /* above everything */
-}
-
-@media (max-width: 480px){
-  body > .scroll-top{
-    right: 16px !important;
-    bottom: 16px !important;
-  }
-}
-
 /* Contact Form Styles */
 .contact-form {
     max-width: 500px;
@@ -1758,4 +1718,94 @@ body > .scroll-top{
 label:has(+ input[required])::after {
     content: " *";
     color: var(--primary-color);
+}
+
+.top-nav-buttons {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-left: auto;
+}
+
+.top-nav-buttons .btn.small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    height: 36px;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.top-nav-buttons .btn.small svg {
+    width: 16px;
+    height: 16px;
+}
+
+.top-nav-buttons .btn.btn-quaternary {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.top-nav-buttons .btn.btn-quaternary:hover {
+    background: rgba(0, 255, 157, 0.1);
+    transform: translateY(-2px);
+}
+
+.top-nav-buttons .btn.btn-primary {
+    background: var(--primary-color);
+    border: none;
+}
+
+.top-nav-buttons .btn.btn-primary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .top-nav-buttons {
+        display: none;
+    }
+}
+
+.action-buttons-section {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-buttons-section .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.action-buttons-section .btn {
+    min-width: 220px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.action-buttons-section .btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    .action-buttons-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .action-buttons-section .btn {
+        width: 100%;
+        min-width: unset;
+    }
 } 
