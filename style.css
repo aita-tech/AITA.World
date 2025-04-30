@@ -1824,22 +1824,26 @@ body {                /* our only scroll container */
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .nav-drawer .mobile-nav-buttons .btn {
     width: 100%;
     min-width: unset;
-    padding: 12px;
-    font-size: 0.95rem;
-    border-radius: 6px;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 8px;
     justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
 .nav-drawer .mobile-nav-buttons .btn.btn-primary {
     background: var(--primary-color);
     color: var(--light-color);
+    border: none;
 }
 
 .nav-drawer .mobile-nav-buttons .btn.btn-quaternary {
@@ -1847,11 +1851,19 @@ body {                /* our only scroll container */
     color: var(--light-color);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    border: none;
 }
 
 .nav-drawer .mobile-nav-buttons .btn.btn-quaternary i {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
     color: var(--light-color);
+}
+
+.nav-drawer .mobile-nav-buttons .btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
 } 
