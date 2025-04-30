@@ -22,6 +22,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    padding-top: 64px;
 }
 
 *, *::before, *::after {
@@ -1310,18 +1311,22 @@ footer {
 
 /* ── ❶ STICKY TOP-BAR ─────────────────────────── */
 .top-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 1050;
     display: flex;
     align-items: center;
     gap: 48px;
     height: 64px;
     padding: 0 40px;
-    background: rgba(17,19,21,.75);
+    background: rgba(17,19,21,.95);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,.05);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
 }
 
 .top-nav .logo {
@@ -1780,43 +1785,40 @@ label:has(+ input[required])::after {
     }
 }
 
+/* ── Ghost button for secondary CTAs ───────────────────────────── */
+.btn-ghost {
+    background: transparent;
+    border: 2px solid rgba(95, 242, 140, 0.35);
+    color: var(--accent-color);
+}
+.btn-ghost:hover {
+    background: rgba(95, 242, 140, 0.10);
+    box-shadow: 0 4px 15px rgba(95, 242, 140, 0.20);
+    transform: translateY(-2px);
+}
+
+/* Glassy container with subtle neon glow */
 .action-buttons-section {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(27, 29, 31, 0.75);
+    backdrop-filter: blur(8px);
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 3rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 24px rgba(95, 242, 140, 0.12);
+    border: none;
 }
 
-.action-buttons-section .cta-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-}
-
+/* Equal widths & comfy space for icons */
 .action-buttons-section .btn {
-    min-width: 220px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    flex: 1 1 0;
+    min-width: 200px;
+    padding: 1rem 2.5rem 1rem 2.75rem; /* extra left-pad so the icon isn't cramped */
+    font-size: 1.05rem;
 }
 
-.action-buttons-section .btn svg {
-    width: 24px;
-    height: 24px;
-}
-
-@media (max-width: 768px) {
-    .action-buttons-section {
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .action-buttons-section .btn {
-        width: 100%;
-        min-width: unset;
-    }
+.action-buttons-section .btn svg,
+.action-buttons-section .btn i {
+    margin-right: 12px;
 }
 
 /* ── Viewport scroll policy ───────────────────────── */
@@ -1872,4 +1874,15 @@ body {                /* our only scroll container */
 .nav-drawer .mobile-nav-buttons .btn:hover {
     transform: translateY(-1px);
     opacity: 0.9;
+}
+
+/* Hide nav when scrolling down, show when scrolling up */
+.top-nav.hidden {
+    transform: translateY(-100%);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 0; /* Remove padding on mobile since nav is in drawer */
+    }
 } 

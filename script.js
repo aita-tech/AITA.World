@@ -242,4 +242,24 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.scrollBehavior = '';
         }, 0);
     });
+});
+
+// Handle sticky navigation
+let lastScroll = 0;
+const nav = document.querySelector('.top-nav');
+const scrollThreshold = 50; // Amount of scroll before hiding nav
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    // Show/hide nav based on scroll direction
+    if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+        // Scrolling down & past threshold
+        nav.classList.add('hidden');
+    } else {
+        // Scrolling up or at top
+        nav.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
 }); 
