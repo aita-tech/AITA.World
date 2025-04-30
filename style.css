@@ -1818,4 +1818,40 @@ html,                 /* the viewport              */
 body {                /* our only scroll container */
     overscroll-behavior-y: none;   /* kill elastic bounce completely   */
     overscroll-behavior-x: contain;/* allow horizontal sliders to work */
+}
+
+.nav-drawer .mobile-nav-buttons {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-drawer .mobile-nav-buttons .btn {
+    width: 100%;
+    min-width: unset;
+    padding: 12px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    justify-content: center;
+}
+
+.nav-drawer .mobile-nav-buttons .btn.btn-primary {
+    background: var(--primary-color);
+    color: var(--light-color);
+}
+
+.nav-drawer .mobile-nav-buttons .btn.btn-quaternary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-drawer .mobile-nav-buttons .btn.btn-quaternary i {
+    width: 18px;
+    height: 18px;
+    color: var(--light-color);
 } 
