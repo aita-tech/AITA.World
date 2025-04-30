@@ -2,29 +2,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
 
 html {
-    background: var(--dark-gradient);   /* same as body */
-    overflow-y: scroll;                 /* prevent jump when scrollbar appears */
-    height: 100%;                       /* ensure full height */
-}
-
-html, body {
-    overscroll-behavior-y: none;        /* completely disable overscroll */
-    height: 100%;                       /* ensure full height */
-    overflow-x: hidden;                 /* prevent horizontal scroll */
+    background: var(--dark-gradient);
+    height: auto;
+    overflow-y: visible;
+    position: static;
 }
 
 body {
-    position: relative;                  /* establish positioning context */
-    min-height: 100%;                   /* ensure minimum full height */
-    overflow-y: auto;                   /* allow normal scrolling */
-    background: var(--dark-gradient);              /* replaces solid #fff   */
-    color: var(--light-color);                     /* site-wide text to white*/
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: contain;
+    background: var(--dark-gradient);
+    color: var(--light-color);
     font-family: 'Golos Text', sans-serif;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* Base Styles */
@@ -1808,4 +1811,11 @@ label:has(+ input[required])::after {
         width: 100%;
         min-width: unset;
     }
+}
+
+/* ── Viewport scroll policy ───────────────────────── */
+html,                 /* the viewport              */
+body {                /* our only scroll container */
+    overscroll-behavior-y: none;   /* kill elastic bounce completely   */
+    overscroll-behavior-x: contain;/* allow horizontal sliders to work */
 } 

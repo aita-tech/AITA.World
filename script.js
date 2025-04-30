@@ -120,8 +120,8 @@ function startCountAnimation(element) {
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const hero = document.querySelector('.hero');
-    const scrolled = window.pageYOffset;
-    hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    const y = Math.max(0, window.scrollY);   // clamp at 0
+    hero.style.backgroundPositionY = y * 0.5 + 'px';
 });
 
 // Interactive cards
