@@ -345,6 +345,12 @@ h3 {
     opacity: .85;
 }
 
+.advantage-item p {
+    opacity: .95;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
 /* Market Problem Section */
 .market-problem {
     position: relative;

@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ticking = true;
         }, {passive: true});
     })();
+
+    // Initialise Lucide once, after DOM is ready
+    lucide.createIcons();
 });
 
 // Number counter animation
@@ -192,6 +195,10 @@ const navDrawer = document.querySelector('.nav-drawer');
 navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('open');
     navDrawer.classList.toggle('open');
+    navToggle.setAttribute(
+        'aria-expanded',
+        navDrawer.classList.contains('open')
+    );
 });
 
 // Close drawer when clicking outside
@@ -201,12 +208,6 @@ document.addEventListener('click', (e) => {
         navDrawer.classList.remove('open');
     }
 });
-
-/* boot lucide icons */
-document.addEventListener('DOMContentLoaded',()=>{lucide.createIcons()});
-
-// Initialize Lucide icons
-lucide.createIcons();
 
 // Scroll to top functionality
 document.addEventListener('DOMContentLoaded', () => {

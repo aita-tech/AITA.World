@@ -10,43 +10,41 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
 </head>
 <body>
     <!-- ── ❶ STICKY TOP-BAR ─────────────────────────── -->
-    <header class="top-nav">
-        <a href="#hero" class="logo">
-            <img src="assets/logo/logo.png" alt="AITA Logo" class="logo-img" width="32" height="32">
-            <div class="logo-text">
-                <span class="logo-main">AITA</span>
-                <span class="logo-sub">platform</span>
-            </div>
-        </a>
-
-        <ul class="top-links">
-            <li><a class="nav-item" href="#pains" aria-current="page">Problem</a></li>
-            <li><a class="nav-item" href="#solution">Solution</a></li>
-            <li><a class="nav-item" href="#partners">Partners</a></li>
-            <li><a class="nav-item" href="#advantages">Benefits</a></li>
-            <li><a class="nav-item" href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="top-nav-buttons">
-            <a href="https://app.aita.world/auth/login" class="btn btn-primary small" target="_blank">Log in</a>
-            <a class="btn btn-quaternary small" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                    <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                </svg>
-                Play AITAverse
+    <header>
+        <nav class="top-nav">
+            <a href="#hero" class="logo">
+                <img src="assets/logo/logo.png" alt="AITA Logo" class="logo-img" width="32" height="32">
+                <div class="logo-text">
+                    <span class="logo-main">AITA</span>
+                    <span class="logo-sub">platform</span>
+                </div>
             </a>
-        </div>
+
+            <ul class="top-links">
+                <li><a class="nav-item" href="#pains" aria-current="page">Problem</a></li>
+                <li><a class="nav-item" href="#solution">Solution</a></li>
+                <li><a class="nav-item" href="#partners">Partners</a></li>
+                <li><a class="nav-item" href="#advantages">Benefits</a></li>
+                <li><a class="nav-item" href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="top-nav-buttons">
+                <a href="https://app.aita.world/auth/login" class="btn btn-primary small" target="_blank">Log in</a>
+                <a class="btn btn-quaternary small" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    </svg>
+                    Play AITAverse
+                </a>
+            </div>
+        </nav>
     </header>
 
     <!-- Mobile burger -->
-    <button class="nav-toggle" aria-label="Open navigation">
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
         <span></span><span></span><span></span>
     </button>
 
@@ -244,42 +242,42 @@
             <div class="partners-grid">
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/Emtel Communications Logo.avif" alt="Emtel Communications" loading="lazy">
+                        <img src="assets/Images Partners/Emtel Communications Logo.avif" alt="Emtel Communications" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>Emtel Communications</h3>
                 </article>
 
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/Unicorn Energy Logo.avif" alt="Unicorn Energy" loading="lazy">
+                        <img src="assets/Images Partners/Unicorn Energy Logo.avif" alt="Unicorn Energy" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>Unicorn Energy</h3>
                 </article>
 
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/Orbita.avif" alt="Orbita" loading="lazy">
+                        <img src="assets/Images Partners/Orbita.avif" alt="Orbita" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>Orbita</h3>
                 </article>
 
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/Solar Bull Overview.jpeg" alt="Solar Bull" loading="lazy">
+                        <img src="assets/Images Partners/Solar Bull Overview.jpeg" alt="Solar Bull" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>Solar Bull</h3>
                 </article>
 
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/Westing Management LLC Logo.jpeg" alt="Westing Management" loading="lazy">
+                        <img src="assets/Images Partners/Westing Management LLC Logo.jpeg" alt="Westing Management" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>Westing Management</h3>
                 </article>
 
                 <article class="partner-card">
                     <div class="partner-image">
-                        <img src="assets/Images Partners/clars.jpeg" alt="CLARS" loading="lazy">
+                        <img src="assets/Images Partners/clars.jpeg" alt="CLARS" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <h3>CLARS</h3>
                 </article>
